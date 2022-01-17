@@ -3,11 +3,14 @@ package com.codeingnight.android.mentalarithmetic;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import java.util.Random;
 
@@ -20,7 +23,10 @@ public class MainViewModel extends AndroidViewModel {
     private static String KEY_ANSWER = "key_answer";
     private static String SAVE_SHP_DATA_NAME = "save_shp_data_name";
     private static String KEY_CURRENT_SCORE = "key_current_score";
+    private static String KEY_CURRENT_INPUT = "key_current_input";
     boolean win_flag = false;
+
+    private final StringBuilder builder = new StringBuilder();
 
     public MainViewModel(@NonNull Application application, SavedStateHandle handle) {
         super(application);
@@ -31,6 +37,7 @@ public class MainViewModel extends AndroidViewModel {
             handle.set(KEY_RIGHT_NUMBER, 0);
             handle.set(KEY_OPERATOR, "+");
             handle.set(KEY_ANSWER, 0);
+            handle.set(KEY_CURRENT_INPUT, getApplication().getString(R.string.input_indicator));
             handle.set(KEY_CURRENT_SCORE, 0);
         }
         this.handle = handle;
@@ -54,6 +61,10 @@ public class MainViewModel extends AndroidViewModel {
 
     public MutableLiveData<Integer> getCurrentScore() {
         return handle.getLiveData(KEY_CURRENT_SCORE);
+    }
+
+    public MutableLiveData<String> getCurrentInput() {
+        return handle.getLiveData(KEY_CURRENT_INPUT);
     }
 
     public MutableLiveData<Integer> getAnswer() {
@@ -108,5 +119,83 @@ public class MainViewModel extends AndroidViewModel {
             win_flag = true;
         }
         generator();
+    }
+
+    public void startChallenge(View view) {
+        NavController controller = Navigation.findNavController(view);
+        controller.navigate(R.id.action_titleFragment_to_questionFragment);
+        getCurrentScore().setValue(0);
+        generator();
+    }
+
+    public void numberInput(View view) {
+        switch (view.getId()) {
+            case R.id.button0:
+                builder.append("0");
+                break;
+            case R.id.button1:
+                builder.append("1");
+                break;
+            case R.id.button2:
+                builder.append("2");
+                break;
+            case R.id.button3:
+                builder.append("3");
+                break;
+            case R.id.button4:
+                builder.append("4");
+                break;
+            case R.id.button5:
+                builder.append("5");
+                break;
+            case R.id.button6:
+                builder.append("6");
+                break;
+            case R.id.button7:
+                builder.append("7");
+                break;
+            case R.id.button8:
+                builder.append("8");
+                break;
+            case R.id.button9:
+                builder.append("9");
+                break;
+            case R.id.buttonClear:
+                builder.setLength(0);
+                break;
+        }
+        if (builder.length() == 0) {
+            getCurrentInput().setValue(getApplication().getString(R.string.input_indicator));
+        } else {
+            getCurrentInput().setValue(builder.toString());
+        }
+    }
+
+    public void submit(View view) {
+        if (builder.length() == 0) {
+            builder.append("-1");
+        }
+        if (Integer.valueOf(builder.toString()).intValue() == getAnswer().getValue()) {
+            answerCorrect();
+            builder.setLength(0);
+            getCurrentInput().setValue(getApplication().getString(R.string.answer_corrrect_message));
+        } else {
+            NavController controller = Navigation.findNavController(view);
+            if (win_flag) {
+                builder.setLength(0);
+                getCurrentInput().setValue(getApplication().getString(R.string.input_indicator));
+                controller.navigate(R.id.action_questionFragment_to_winFragment);
+                win_flag = false;
+                save();
+            } else {
+                builder.setLength(0);
+                getCurrentInput().setValue(getApplication().getString(R.string.input_indicator));
+                controller.navigate(R.id.action_questionFragment_to_loseFragment);
+            }
+        }
+    }
+
+    public void backToTitle(View view) {
+        Navigation.findNavController(view).navigate(R.id.titleFragment);
     }
 }

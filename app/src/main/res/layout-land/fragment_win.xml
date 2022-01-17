@@ -94,6 +94,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/button_back_to_title"
+            android:onClick="@{(v) -> data.backToTitle(v)}"
             app:layout_constraintBottom_toTopOf="@+id/guideline23"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintHorizontal_bias="0.5"

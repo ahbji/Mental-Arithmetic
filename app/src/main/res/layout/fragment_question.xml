@@ -144,13 +144,27 @@
             app:layout_constraintTop_toTopOf="@+id/guideline2"
             tools:text="\?" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/textView9"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            android:text="@string/input_indicator"-->
+<!--            android:textSize="@dimen/mid_font"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/guideline3"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/guideline7"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/guideline6"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/guideline3"-->
+<!--            tools:text="Your Answer" />-->
+
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/input_indicator"
+            android:text="@{data.currentInput}"
             android:textSize="@dimen/mid_font"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
@@ -186,6 +200,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/button1"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toTopOf="@+id/guideline11"
             app:layout_constraintEnd_toStartOf="@+id/button2"
             app:layout_constraintHorizontal_bias="0.5"
@@ -198,6 +213,7 @@
             android:layout_height="0dp"
             android:text="@string/button2"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toBottomOf="@+id/button1"
             app:layout_constraintEnd_toStartOf="@+id/button3"
             app:layout_constraintHorizontal_bias="0.5"
@@ -211,6 +227,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/button3"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toBottomOf="@+id/button2"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintHorizontal_bias="0.5"
@@ -224,6 +241,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/button4"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toTopOf="@+id/guideline12"
             app:layout_constraintEnd_toStartOf="@+id/button5"
             app:layout_constraintHorizontal_bias="0.5"
@@ -236,6 +254,7 @@
             android:layout_height="0dp"
             android:text="@string/button5"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toBottomOf="@+id/button4"
             app:layout_constraintEnd_toStartOf="@+id/button6"
             app:layout_constraintHorizontal_bias="0.5"
@@ -249,6 +268,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/button6"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toBottomOf="@+id/button5"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintHorizontal_bias="0.5"
@@ -262,6 +282,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/button7"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintEnd_toStartOf="@+id/button8"
             app:layout_constraintHorizontal_bias="0.5"
@@ -275,6 +296,7 @@
             android:layout_height="0dp"
             android:text="@string/button8"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toBottomOf="@+id/button7"
             app:layout_constraintEnd_toStartOf="@+id/button9"
             app:layout_constraintHorizontal_bias="0.5"
@@ -288,6 +310,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/button9"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toBottomOf="@+id/button8"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintHorizontal_bias="0.5"
@@ -301,6 +324,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/buttonClear"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/button0"
             app:layout_constraintHorizontal_bias="0.5"
@@ -313,6 +337,7 @@
             android:layout_height="0dp"
             android:text="@string/button0"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.numberInput(v)}"
             app:layout_constraintBottom_toBottomOf="@+id/buttonClear"
             app:layout_constraintEnd_toStartOf="@+id/buttonSubmit"
             app:layout_constraintHorizontal_bias="0.5"
@@ -326,6 +351,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/buttonSubmit"
             android:textSize="@dimen/button_font"
+            android:onClick="@{(v) -> data.submit(v)}"
             app:layout_constraintBottom_toBottomOf="@+id/button0"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintHorizontal_bias="0.5"

@@ -16,17 +16,7 @@ import androidx.navigation.Navigation;
 
 import com.codeingnight.android.mentalarithmetic.databinding.FragmentTitleBinding;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TitleFragment extends Fragment {
-
-
-    public TitleFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -35,16 +25,6 @@ public class TitleFragment extends Fragment {
         FragmentTitleBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_title, container, false);
         binding.setData(mainViewModel);
         binding.setLifecycleOwner(requireActivity());
-        binding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController controller = Navigation.findNavController(v);
-                controller.navigate(R.id.action_titleFragment_to_questionFragment);
-                mainViewModel.getCurrentScore().setValue(0);
-                mainViewModel.generator();
-            }
-        });
         return binding.getRoot();
     }
-
 }
