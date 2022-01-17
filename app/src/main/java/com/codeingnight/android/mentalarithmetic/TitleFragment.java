@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateViewModelFactory;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -31,10 +31,8 @@ public class TitleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final MainViewModel mainViewModel;
-        mainViewModel = ViewModelProviders.of(requireActivity(), new SavedStateViewModelFactory(requireActivity().getApplication(), requireActivity())).get(MainViewModel.class);
-        FragmentTitleBinding binding;
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_title, container, false);
+        MainViewModel mainViewModel = new ViewModelProvider(requireActivity(), new SavedStateViewModelFactory(requireActivity().getApplication(), requireActivity())).get(MainViewModel.class);
+        FragmentTitleBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_title, container, false);
         binding.setData(mainViewModel);
         binding.setLifecycleOwner(requireActivity());
         binding.button.setOnClickListener(new View.OnClickListener() {
@@ -47,8 +45,6 @@ public class TitleFragment extends Fragment {
             }
         });
         return binding.getRoot();
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_title, container, false);
     }
 
 }

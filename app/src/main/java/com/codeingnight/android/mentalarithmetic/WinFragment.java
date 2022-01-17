@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateViewModelFactory;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.codeingnight.android.mentalarithmetic.databinding.FragmentWinBinding;
@@ -30,10 +30,8 @@ public class WinFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        MainViewModel mainViewModel = ViewModelProviders.of(requireActivity(), new SavedStateViewModelFactory(requireActivity().getApplication(), requireActivity())).get(MainViewModel.class);
-        FragmentWinBinding binding;
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_win, container, false);
+        MainViewModel mainViewModel = new ViewModelProvider(requireActivity(), new SavedStateViewModelFactory(requireActivity().getApplication(), requireActivity())).get(MainViewModel.class);
+        FragmentWinBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_win, container, false);
         binding.setData(mainViewModel);
         binding.setLifecycleOwner(requireActivity());
         binding.button11.setOnClickListener(new View.OnClickListener() {
@@ -44,5 +42,4 @@ public class WinFragment extends Fragment {
         });
         return binding.getRoot();
     }
-
 }

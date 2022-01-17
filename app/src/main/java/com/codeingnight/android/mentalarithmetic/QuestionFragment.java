@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateViewModelFactory;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -31,12 +31,9 @@ public class QuestionFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final MainViewModel mainViewModel;
-        mainViewModel = ViewModelProviders.of(requireActivity(), new SavedStateViewModelFactory(requireActivity().getApplication(), requireActivity())).get(MainViewModel.class);
-        //myViewModel.generator();
-        //myViewModel.getCurrentScore().setValue(0);
-        final FragmentQuestionBinding binding;
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_question, container, false);
+        MainViewModel mainViewModel = new ViewModelProvider(requireActivity(), new SavedStateViewModelFactory(requireActivity().getApplication(), requireActivity())).get(MainViewModel.class);
+
+        FragmentQuestionBinding binding  = DataBindingUtil.inflate(inflater, R.layout.fragment_question, container, false);
         binding.setData(mainViewModel);
         binding.setLifecycleOwner(requireActivity());
         final StringBuilder builder = new StringBuilder();
