@@ -12,6 +12,7 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class MainViewModel extends AndroidViewModel {
@@ -28,7 +29,7 @@ public class MainViewModel extends AndroidViewModel {
 
     private final StringBuilder builder = new StringBuilder();
 
-    public MainViewModel(@NonNull Application application, SavedStateHandle handle) {
+    public MainViewModel(Application application, SavedStateHandle handle) {
         super(application);
         if (!handle.contains(KEY_HIGH_SCORE)) {
             SharedPreferences shp = getApplication().getSharedPreferences(SAVE_SHP_DATA_NAME, Context.MODE_PRIVATE);
@@ -129,40 +130,29 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void numberInput(View view) {
-        switch (view.getId()) {
-            case R.id.button0:
-                builder.append("0");
-                break;
-            case R.id.button1:
-                builder.append("1");
-                break;
-            case R.id.button2:
-                builder.append("2");
-                break;
-            case R.id.button3:
-                builder.append("3");
-                break;
-            case R.id.button4:
-                builder.append("4");
-                break;
-            case R.id.button5:
-                builder.append("5");
-                break;
-            case R.id.button6:
-                builder.append("6");
-                break;
-            case R.id.button7:
-                builder.append("7");
-                break;
-            case R.id.button8:
-                builder.append("8");
-                break;
-            case R.id.button9:
-                builder.append("9");
-                break;
-            case R.id.buttonClear:
-                builder.setLength(0);
-                break;
+        int id = view.getId();
+        if (id == R.id.button0) {
+            builder.append("0");
+        } else if (id == R.id.button1) {
+            builder.append("1");
+        } else if (id == R.id.button2) {
+            builder.append("2");
+        } else if (id == R.id.button3) {
+            builder.append("3");
+        } else if (id == R.id.button4) {
+            builder.append("4");
+        } else if (id == R.id.button5) {
+            builder.append("5");
+        } else if (id == R.id.button6) {
+            builder.append("6");
+        } else if (id == R.id.button7) {
+            builder.append("7");
+        } else if (id == R.id.button8) {
+            builder.append("8");
+        } else if (id == R.id.button9) {
+            builder.append("9");
+        } else if (id == R.id.buttonClear) {
+            builder.setLength(0);
         }
         if (builder.length() == 0) {
             getCurrentInput().setValue(getApplication().getString(R.string.input_indicator));
@@ -175,7 +165,7 @@ public class MainViewModel extends AndroidViewModel {
         if (builder.length() == 0) {
             builder.append("-1");
         }
-        if (Integer.valueOf(builder.toString()).intValue() == getAnswer().getValue()) {
+        if (Integer.valueOf(builder.toString()).intValue() == Objects.requireNonNull(getAnswer().getValue())) {
             answerCorrect();
             builder.setLength(0);
             getCurrentInput().setValue(getApplication().getString(R.string.answer_corrrect_message));
