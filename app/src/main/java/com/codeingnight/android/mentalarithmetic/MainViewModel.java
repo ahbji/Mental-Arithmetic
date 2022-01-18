@@ -16,20 +16,20 @@ import java.util.Objects;
 import java.util.Random;
 
 public class MainViewModel extends AndroidViewModel {
-    private SavedStateHandle handle;
-    private static String KEY_HIGH_SCORE = "key_high_score";
-    private static String KEY_LEFT_NUMBER = "key_left_number";
-    private static String KEY_RIGHT_NUMBER = "key_right_number";
-    private static String KEY_OPERATOR = "key_operator";
-    private static String KEY_ANSWER = "key_answer";
-    private static String SAVE_SHP_DATA_NAME = "save_shp_data_name";
-    private static String KEY_CURRENT_SCORE = "key_current_score";
-    private static String KEY_CURRENT_INPUT = "key_current_input";
+    private final SavedStateHandle handle;
+    private static final String KEY_HIGH_SCORE = "key_high_score";
+    private static final String KEY_LEFT_NUMBER = "key_left_number";
+    private static final String KEY_RIGHT_NUMBER = "key_right_number";
+    private static final String KEY_OPERATOR = "key_operator";
+    private static final String KEY_ANSWER = "key_answer";
+    private static final String SAVE_SHP_DATA_NAME = "save_shp_data_name";
+    private static final String KEY_CURRENT_SCORE = "key_current_score";
+    private static final String KEY_CURRENT_INPUT = "key_current_input";
     boolean win_flag = false;
 
     private final StringBuilder builder = new StringBuilder();
 
-    public MainViewModel(Application application, SavedStateHandle handle) {
+    public MainViewModel(Application application, @NonNull SavedStateHandle handle) {
         super(application);
         if (!handle.contains(KEY_HIGH_SCORE)) {
             SharedPreferences shp = getApplication().getSharedPreferences(SAVE_SHP_DATA_NAME, Context.MODE_PRIVATE);
@@ -129,7 +129,7 @@ public class MainViewModel extends AndroidViewModel {
         generator();
     }
 
-    public void numberInput(View view) {
+    public void numberInput(@NonNull View view) {
         int id = view.getId();
         if (id == R.id.button0) {
             builder.append("0");
